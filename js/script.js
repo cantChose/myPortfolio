@@ -207,7 +207,26 @@ const validate = new window.JustValidate('.about__form', {
 
     name: "Ошибка",
   },
-  colorWrong: '#d52b1e'
+  colorWrong: '#d52b1e',
+
+  submitHandler: function(thisForm) {
+    let formData = new FormData(thisForm);
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          console.log('Отправлено');
+        }
+      }
+    }
+
+    xhr.open('POST', 'mail.php', true);
+    xhr.send(formData);
+
+    thisForm.reset();
+  }
 });
 
 // modal
